@@ -1,6 +1,0 @@
-SET storage_engine=MyISAM;
-
-DROP DATABASE IF EXISTS lutece_dl;
-CREATE DATABASE IF NOT EXISTS lutece_dl DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
-USE lutece_dl;
-
