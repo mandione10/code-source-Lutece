@@ -526,20 +526,32 @@ public class PluginLuteceXPage extends MVCApplication
 	}
     }
     
-    public void creerDirectory(String directory){
+   public static void creerDirectory(String directory){
         //create the directory
-        File theDir = new File(directory);
-        // if the directory does not exist, create it
-        if (!theDir.exists()) {
-
+        File theDir = new File(directory);       
+        // if the directory exist
+        if (theDir.exists()) {
+            deleteDirectory(new File(directory));
+        }   
             try{
                 theDir.mkdir();
             } 
             catch(SecurityException se){
                 //handle it
             }               
-        }
     }
+     public static void deleteDirectory(File path) {
+          File[] files = path.listFiles();
+          for(int i=0; i<files.length; i++) {
+             if(files[i].isDirectory()) {
+               deleteDirectory(files[i]);
+             }
+             else {
+               files[i].delete();
+             }
+          }
+        path.delete();
+     }
     
     public String version(String p){
         String version = "Release not found";
