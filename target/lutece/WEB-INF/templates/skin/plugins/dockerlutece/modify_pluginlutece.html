@@ -1,0 +1,59 @@
+<#include "dockerlutece_tabs.html" />
+<@tabs tab="pluginlutece" />
+
+<div class="row" >
+    <div class="col-sm-12">
+
+    <form class="form-horizontal" method="post" action="jsp/site/Portal.jsp?page=pluginlutece">
+        <fieldset>
+            <legend>#i18n{dockerlutece.modify_pluginlutece.tableLabel}</legend>
+
+            <@messages errors=errors />
+            <input type="hidden" id="id" name="id" value="${pluginlutece.id}"/>
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="group_id" >#i18n{dockerlutece.modify_pluginlutece.labelGroupId} * :</label>
+                <div class="col-sm-9">
+                    <input class="form-control" type="text" id="group_id" name="group_id"  maxlength="50" value="${pluginlutece.groupId}" tabindex="1" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="artifact_id" >#i18n{dockerlutece.modify_pluginlutece.labelArtifactId} * :</label>
+                <div class="col-sm-9">
+                    <input class="form-control" type="text" id="artifact_id" name="artifact_id"  maxlength="50" value="${pluginlutece.artifactId}" tabindex="1" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="version" >#i18n{dockerlutece.modify_pluginlutece.labelVersion} * :</label>
+                <div class="col-sm-9">
+                    <input class="form-control" type="text" id="version" name="version"  maxlength="50" value="${pluginlutece.version}" tabindex="1" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="domaine" >#i18n{dockerlutece.modify_pluginlutece.labelDomaine} * :</label>
+                <div class="col-sm-9">
+                    <select name="domaine" class="col-md-offset-1">
+						<#list domainepluginlutece_list as domainepluginlutece>
+							<option value="${domainepluginlutece.domaine}"<#if (domainepluginlutece.domaine == pluginlutece.domaine)>selected
+							</#if>>${domainepluginlutece.domaine}</option>
+						</#list>
+					</select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-9">
+                    <button name="action_modifyPluginLutece" class="btn btn-primary" type="submit" tabindex="4" >
+                        #i18n{portal.util.labelModify}
+                    </button>
+                    <button name="view_managePluginLuteces" class="btn" type="submit" >
+                        #i18n{portal.util.labelCancel}
+                    </button>	
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+    </div>  
+
+</div>
+
+  

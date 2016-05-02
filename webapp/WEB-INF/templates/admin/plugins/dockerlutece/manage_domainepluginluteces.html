@@ -1,0 +1,60 @@
+<#include "managedomainedockerlutece_tabs.html" />
+    <ul class="nav nav-tabs">
+        <li class="active"><@tabs tab="domainepluginlutece" /></li>
+	<li><a href="jsp/admin/plugins/dockerlutece/ManagePluginLuteces.jsp?view=managePluginLuteces" id="a1">PluginLutece</a><li>				
+    </ul>	
+    <script type="text/javascript">
+           $(document).ready(function() {
+                $('#a1').click(function() {
+		   $('.wrapper').load('jsp/admin/plugins/dockerlutece/ManagePluginLuteces.jsp?view=managePluginLuteces');
+                    return false;
+                });
+           });
+    </script>
+<@rowBox>
+    <@boxHeader i18nTitleKey="dockerlutece.manage_domainepluginluteces.tableLabel">
+        <@headerButtons>
+
+        
+        <form class="form-inline pull-right" method="post" name="manage_domainepluginluteces" action="jsp/admin/plugins/dockerlutece/ManageDomainePluginLuteces.jsp">
+            <!-- Add pull-right to class1 -->
+            <@actionButtons button1Name="view_createDomainePluginLutece" icon1="icon-plus icon-white" i18nValue1Key="dockerlutece.manage_domainepluginluteces.buttonAdd" />
+        </form>
+        
+    </@headerButtons>
+    </@boxHeader>
+    <@boxBody>    
+    <@messages infos=infos />
+    <@paginationAdmin paginator=paginator combo=1 />
+    
+    <@table>
+        <tr>
+            <input type="hidden" id="id" name="id"/>
+            <th>#i18n{dockerlutece.manage_domainepluginluteces.columnDomaine}</th>
+            <th>#i18n{portal.util.labelActions}</th>
+        </tr>
+        <@tableHeadBodySeparator />
+            <#list domainepluginlutece_list as domainepluginlutece >
+        <tr>
+            <input type="hidden" id="id" name="id"/>
+            <td>
+                ${domainepluginlutece.domaine}
+            </td>
+        <td>
+            <a href="jsp/admin/plugins/dockerlutece/ManageDomainePluginLuteces.jsp?view=modifyDomainePluginLutece&id=${domainepluginlutece.id}"
+               class="btn btn-primary btn-small" title="#i18n{portal.util.labelModify}">
+                <i class="fa fa-pencil"></i>
+            </a>
+
+            <a href="jsp/admin/plugins/dockerlutece/ManageDomainePluginLuteces.jsp?action=confirmRemoveDomainePluginLutece&id=${domainepluginlutece.id}"
+               class="btn btn-danger btn-small" title="#i18n{portal.util.labelDelete}" >
+                <i class="fa fa-trash"></i>
+            </a>
+        </td>
+        </tr>
+        </#list>
+    </@table>
+    <@paginationAdmin paginator=paginator />
+  </@boxBody>
+</@rowBox>
+

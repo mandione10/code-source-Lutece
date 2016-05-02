@@ -1,0 +1,60 @@
+<#include "dockerlutece_tabs.html" />
+<@tabs tab="pluginlutece" />
+
+<div class="row" >
+    <div class="col-sm-12">
+
+    <form class="form-horizontal" role="form" method="post" action="jsp/site/Portal.jsp?page=pluginlutece">
+        <fieldset>
+            <legend>#i18n{dockerlutece.create_pluginlutece.tableLabel}</legend>
+
+            <@messages errors=errors />
+            <input type="hidden" id="id" name="id"/>  
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="group_id" >#i18n{dockerlutece.create_pluginlutece.labelGroupId} * :</label>
+                <div class="col-sm-9">
+                    <input class="form-control" type="text" id="group_id" name="group_id" value="${pluginlutece.groupId!''}"  maxlength="50" tabindex="0" />
+                    <span class="help-block">#i18n{dockerlutece.create_pluginlutece.labelGroupId.help}</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="artifact_id" >#i18n{dockerlutece.create_pluginlutece.labelArtifactId} * :</label>
+                <div class="col-sm-9">
+                    <input class="form-control" type="text" id="artifact_id" name="artifact_id" value="${pluginlutece.artifactId!''}"  maxlength="50" tabindex="1" />
+                    <span class="help-block">#i18n{dockerlutece.create_pluginlutece.labelArtifactId.help}</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="version" >#i18n{dockerlutece.create_pluginlutece.labelVersion} * :</label>
+                <div class="col-sm-9">
+                    <input class="form-control" type="text" id="version" name="version" value="${pluginlutece.version!''}"  maxlength="50" tabindex="2" />
+                    <span class="help-block">#i18n{dockerlutece.create_pluginlutece.labelVersion.help}</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="domaine" >#i18n{dockerlutece.create_pluginlutece.labelDomaine} * :</label>
+                <div class="col-sm-9">
+					<select name="domaine" class="col-md-offset-1" id="domaine" tabindex="3">
+						<#list domainepluginlutece_list as domainepluginlutece>
+							<option value="${domainepluginlutece.domaine}">${domainepluginlutece.domaine}</option>
+						</#list>
+					</select>
+                    <span class="help-block">#i18n{dockerlutece.create_pluginlutece.labelDomaine.help}</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-9">
+                    <button name="action_createPluginLutece" class="btn btn-primary" type="submit" tabindex="4">
+                        #i18n{portal.util.labelCreate}
+                    </button>
+                    <button name="view_managePluginLuteces" class="btn" type="submit" >
+                        #i18n{portal.util.labelCancel}
+                    </button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+    </div>
+</div>
+
+  

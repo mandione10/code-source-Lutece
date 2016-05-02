@@ -1,0 +1,60 @@
+<#include "dockerlutece_tabs.html" />
+<@tabs tab="pluginlutece" />
+
+<div class="row" >
+    <div class="col-sm-12">
+
+        <@messages infos=infos />
+
+        <form method="post"  action="jsp/site/Portal.jsp?page=pluginlutece">
+            <button name="view_createPluginLutece" class="btn btn-primary pull-right" type="submit">
+                <span class="glyphicon glyphicon-plus"></span>
+                #i18n{dockerlutece.manage_pluginluteces.buttonAdd}
+            </button>
+        </form>
+
+    <h4>#i18n{dockerlutece.manage_pluginluteces.tableLabel}</h4>
+        
+    <table class="table table-condensed table-striped">
+        <tr>
+            <input type="hidden" id="id" name="id"/>
+            <th>#i18n{dockerlutece.manage_pluginluteces.columnGroupId}</th>
+            <th>#i18n{dockerlutece.manage_pluginluteces.columnArtifactId}</th>
+            <th>#i18n{dockerlutece.manage_pluginluteces.columnVersion}</th>
+            <th>#i18n{dockerlutece.manage_pluginluteces.columnDomaine}</th>
+            <th>#i18n{portal.util.labelActions}</th>
+        </tr>
+            <#list pluginlutece_list as pluginlutece >
+        <tr>
+            <input type="hidden" id="id" name="id" />
+            <td>
+                ${pluginlutece.groupId}
+            </td>    
+            <td>
+                ${pluginlutece.artifactId}
+            </td>    
+            <td>
+                ${pluginlutece.version}
+            </td>    
+            <td>
+                ${pluginlutece.domaine}
+            </td>    
+        <td>
+            <a href="jsp/site/Portal.jsp?page=pluginlutece&view=modifyPluginLutece&id=${pluginlutece.id}"
+               class="btn btn-primary btn-small" title="#i18n{portal.util.labelModify}">
+                <span class="glyphicon glyphicon-edit"></span>
+            </a>
+
+            <a href="jsp/site/Portal.jsp?page=pluginlutece&action=confirmRemovePluginLutece&id=${pluginlutece.id}"
+               class="btn btn-danger btn-small" title="#i18n{portal.util.labelDelete}" >
+                <span class="glyphicon glyphicon-trash"></span>
+            </a>
+        </td>
+        </tr>
+        </#list>
+    </table>
+    
+    </div>
+</div>
+
+  

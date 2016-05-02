@@ -1,0 +1,79 @@
+<#include "manageplugindockerlutece_tabs.html" />
+    <ul class="nav nav-tabs">
+	<li><a href="jsp/admin/plugins/dockerlutece/ManageDomainePluginLuteces.jsp?plugin_name=dockerlutece" id="a1">DomainePluginLutece</a><li>
+	<li class="active"><@tabs tab="pluginlutece" /></li>
+    </ul>	
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#a1').click(function() {
+                $('.wrapper').load('jsp/admin/plugins/dockerlutece/ManageDomainePluginLuteces.jsp?plugin_name=dockerlutece');
+                return false;
+            });
+        });
+</script>				
+
+<@rowBox>
+    <@boxHeader i18nTitleKey="dockerlutece.manage_pluginluteces.tableLabel">
+        <@headerButtons>
+
+        
+        <form class="form-inline pull-right" method="post" name="manage_pluginluteces" action="jsp/admin/plugins/dockerlutece/ManagePluginLuteces.jsp">
+            <!-- Add pull-right to class1 -->
+            <@actionButtons button1Name="view_createPluginLutece" icon1="icon-plus icon-white" i18nValue1Key="dockerlutece.manage_pluginluteces.buttonAdd" />
+        </form>
+        
+    </@headerButtons>
+    </@boxHeader>
+    <@boxBody>    
+    <@messages infos=infos />
+    <@paginationAdmin paginator=paginator combo=1 />
+    
+    <@table>
+        <tr>
+            <input type="hidden" id="id" name="id"/>
+            <th>#i18n{dockerlutece.manage_pluginluteces.columnGroupId}</th>
+            <th>#i18n{dockerlutece.manage_pluginluteces.columnArtifactId}</th>
+            <th>#i18n{dockerlutece.manage_pluginluteces.columnVersion}</th>
+            <th>#i18n{dockerlutece.manage_pluginluteces.columnType}</th>
+            <th>#i18n{dockerlutece.manage_pluginluteces.columnDomaine}</th>
+            <th>#i18n{portal.util.labelActions}</th>
+        </tr>
+        <@tableHeadBodySeparator />
+            <#list pluginlutece_list as pluginlutece >
+        <tr>
+            <input type="hidden" id="id" name="id"/>
+            <td>
+                ${pluginlutece.groupId}
+            </td>
+            <td>
+                ${pluginlutece.artifactId}
+            </td>
+            <td>
+                ${pluginlutece.version}
+            </td>
+            <td>
+                ${pluginlutece.type}
+            </td>
+            <td>
+                ${pluginlutece.domaine}
+            </td>
+        <td>
+            <a href="jsp/admin/plugins/dockerlutece/ManagePluginLuteces.jsp?view=modifyPluginLutece&id=${pluginlutece.id}"
+               class="btn btn-primary btn-small" title="#i18n{portal.util.labelModify}">
+                <i class="fa fa-pencil"></i>
+            </a>
+
+            <a href="jsp/admin/plugins/dockerlutece/ManagePluginLuteces.jsp?action=confirmRemovePluginLutece&id=${pluginlutece.id}"
+               class="btn btn-danger btn-small" title="#i18n{portal.util.labelDelete}" >
+                <i class="fa fa-trash"></i>
+            </a>
+        </td>
+        </tr>
+        </#list>
+    </@table>
+
+    <@paginationAdmin paginator=paginator />
+
+  </@boxBody>
+</@rowBox>
+

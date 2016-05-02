@@ -1,0 +1,113 @@
+
+<head>
+    <link rel="stylesheet" href="http://static.jstree.com/latest/assets/dist/themes/default/style.min.css" />
+    <script src="http://static.jstree.com/latest/assets/dist/libs/jquery.js"></script>
+    <script src="http://static.jstree.com/latest/assets/dist/jstree.min.js"></script>
+</head>
+<@rowBox>
+    <@boxBody>    
+    <@messages infos=infos />
+	
+    <div class="container">
+		<div class="row">
+			<div class="col-lg-7">
+				<h3>Dockeriser le CMS Lutece</h3>
+				<p>Vous pouvez g&eacute;n&eacute;rer un fichier zip contenant le dockerfile et le pom r&eacute;sultant de votre s&eacute;lection</p>
+			<div>
+			<div class="col-lg-5">
+				<div id="container"/>
+			</div>
+			<hr />
+			<div class="col-lg-12 ">
+				Collez ici la liste des plugins non pris en
+				compte pour lesquels vous souhaitez construire les d&eacute;clarations de d&eacute;pendances. 
+				<select class="form-control" id="plugins_bis" multiple="multiple">
+					<#list pluginlutece_list as pluginlutece >
+						<option value="${pluginlutece}">${pluginlutece}</option>
+					</#list>
+				</select>
+			</div>
+			<div class="col-lg-5">					
+				<button type="submit" id="test" class="btn btn-success">G&eacute;n&eacute;rer le POM</button>
+			</div>
+		</div>
+	</div>
+</@boxBody>
+</@rowBox>
+<script>
+    $(function () {
+         var ajaxResponse = 
+            ' 						<ul>' +
+			'  							<#list domaineplugins_list?keys as key> ' +
+			' 								<#assign strKey = key > ' +
+			'								<li data-checkstate="undetermined">${strKey}' +
+			' 									<ul>' +
+			'  										<#list domaineplugins_list[strKey] as pluginlutece > ' +
+			'											<li data-checkstate="undetermined">${pluginlutece.artifactId}' +
+			'  										</#list>' + 
+			' 									</ul>' +
+			'       						</li>' +
+			'  							</#list>' + 
+			'                       </ul>';
+
+        var tree = $("#container");
+		tree.html(ajaxResponse);
+		tree.jstree({
+        plugins: ["checkbox" ],
+        core: {
+            "themes": {
+                "icons": false
+            }
+        }
+    });
+    tree.jstree(true).open_all();
+    $('li[data-checkstate="checked"]').each(function() {
+        tree.jstree('check_node', $(this));		
+	});
+	
+	$('#test').click(function(){
+	var selected = $('#container').jstree(true).get_selected(true), text = [];
+		for(var i = 0, j = selected.length; i < j; i++) {
+			text.push(selected[i].text);		
+		}
+		r = '<#list domaineplugins_list?keys as key>'+
+			'<#assign strKey = key >'+
+			'${strKey}'+
+			'*'+
+			'</#list>';
+		var t = r.split("*"), data = "";  
+		for(var i = 0, j = text.length; i < j; i++) {
+			if(!t.includes(text[i].trim())){
+				if(data == "")	
+					data = data +  text[i].trim();
+				else
+					data = data + "*" + text[i].trim();
+			}
+		}
+		var selectBox = document.getElementById("plugins_bis"), i;
+		for (i=0; i < selectBox.length; i++) 
+		{
+			if (selectBox[i].selected) 
+			{
+				if(data.length == 0)	
+						data = data +  selectBox[i].text;
+					else
+						data = data + "*" + selectBox[i].text;
+			}
+		}
+		$.ajax({
+			type: 'POST',
+			url: 'jsp/site/Portal.jsp?page=pluginlutece&action=generatePom',
+			data: { 'plugins': data},
+			async : false,
+			success: function(msg){
+                            if( data !== ""){
+                            window.location.href = 'jsp/site/Portal.jsp?page=pluginlutece&action=downloadPluginLutece';
+                        }
+			}
+		});
+	});
+    tree.jstree(true).close_all();
+	
+	});
+</script>

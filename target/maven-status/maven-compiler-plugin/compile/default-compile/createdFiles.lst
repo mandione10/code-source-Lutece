@@ -1,0 +1,14 @@
+fr\paris\lutece\plugins\dockerlutece\business\IPluginLuteceDAO.class
+fr\paris\lutece\plugins\dockerlutece\web\DomainePluginLuteceXPage.class
+fr\paris\lutece\plugins\dockerlutece\business\PluginLuteceDAO.class
+fr\paris\lutece\plugins\dockerlutece\web\PluginLuteceJspBean.class
+fr\paris\lutece\plugins\dockerlutece\web\DomainePluginLuteceJspBean.class
+fr\paris\lutece\plugins\dockerlutece\web\PluginLuteceXPage.class
+fr\paris\lutece\plugins\dockerlutece\business\DomainePluginLuteceHome.class
+fr\paris\lutece\plugins\dockerlutece\web\ManageDomaineDockerluteceJspBean.class
+fr\paris\lutece\plugins\dockerlutece\business\PluginLutece.class
+fr\paris\lutece\plugins\dockerlutece\web\ManagePluginDockerluteceJspBean.class
+fr\paris\lutece\plugins\dockerlutece\business\IDomainePluginLuteceDAO.class
+fr\paris\lutece\plugins\dockerlutece\business\PluginLuteceHome.class
+fr\paris\lutece\plugins\dockerlutece\business\DomainePluginLutece.class
+fr\paris\lutece\plugins\dockerlutece\business\DomainePluginLuteceDAO.class

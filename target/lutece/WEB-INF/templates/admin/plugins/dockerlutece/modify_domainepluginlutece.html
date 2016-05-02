@@ -1,0 +1,24 @@
+<#include "managedomainedockerlutece_tabs.html" />
+    <ul class="nav nav-tabs">
+	<li class="active"><@tabs tab="domainepluginlutece" /></li>
+	<li><a href="jsp/admin/plugins/dockerlutece/ManagePluginLuteces.jsp?view=managePluginLuteces" id="a1">PluginLutece</a><li>				
+    </ul>	
+    <script type="text/javascript">
+           $(document).ready(function() {
+                $('#a1').click(function() {
+		   $('.wrapper').load('jsp/admin/plugins/dockerlutece/ManagePluginLuteces.jsp?view=managePluginLuteces');
+                    return false;
+                });
+            });
+    </script>
+
+<@rowBoxHeader i18nTitleKey="dockerlutece.modify_domainepluginlutece.pageTitle">
+    <form class="form-horizontal" method="post" name="modify_domainepluginlutece" action="jsp/admin/plugins/dockerlutece/ManageDomainePluginLuteces.jsp">
+        <@messages errors=errors />
+        <input type="hidden" id="id" name="id" value="${domainepluginlutece.id}"/>
+        
+        <@fieldInputText i18nLabelKey="dockerlutece.modify_domainepluginlutece.labelDomaine" inputName="domaine" mandatory=true value="${domainepluginlutece.domaine}" i18nHelpBlockKey="dockerlutece.modify_domainepluginlutece.labelDomaine.help" />
+        <@actionButtons button1Name="action_modifyDomainePluginLutece" button2Name="view_manageDomainePluginLuteces"/>
+    </form>
+</@rowBoxHeader>
+

@@ -1,0 +1,53 @@
+<@rowBox>
+    <@boxBody>    
+    <@messages infos=infos />
+	
+    <div class="container">
+			<#list versionsplugins_list?keys as key>
+				<#assign strkey=key>
+				<#assign i=1>				
+				<label for="${strkey}">${strkey}</label><br>
+				<#list versionsplugins_list[strkey] as version > 
+				<input type="radio" name="${strkey}" id="${strkey}" value="${version}" <#if (i == 1)> checked </#if>>${version}<br>
+					 <#assign i= i + 1>
+				</#list>
+			</#list>  
+            <button type="submit" id="test" class="btn btn-success">T&eacute;l&eacute;charger</button>
+    </div>
+	${pluginlutece}
+    </@boxBody>
+</@rowBox>
+<script>
+	var data = [];
+	$(function () {
+		$('#test').click(function(){
+		var r = '<#list versionsplugins_list?keys as key>'+
+			'<#assign strkey=key >'+
+			'${strkey}'+
+			'*'+
+			'</#list>';
+			
+			var t = r.split("*");
+			var version = "";
+			for(var i = 0, j = t.length; i < j - 1; i++) {
+				if(version == "")	
+					version = version +  t[i].trim()+"+"+ document.getElementById(t[i].trim()).value;
+				else
+					version = version + "*" + t[i].trim()+"+"+ document.getElementById(t[i].trim()).value;
+			}
+			alert(version);
+					
+			$.ajax({
+				type: 'POST',
+				url: 'http://localhost:8080/FORM/jsp/site/Portal.jsp?page=pluginlutece&action=generatePom',
+				data: { 'versions': version},
+				async : false,
+				success: function(msg){
+							if( version !== ""){
+								window.location.assign('http://localhost:8080/FORM/jsp/site/Portal.jsp?page=pluginlutece&action=downloadPluginLutece');
+							}
+				}
+			});
+		});
+    });
+</script>

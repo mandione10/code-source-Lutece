@@ -1,0 +1,36 @@
+<#include "manageplugindockerlutece_tabs.html" />
+    <ul class="nav nav-tabs">
+	<li><a href="jsp/admin/plugins/dockerlutece/ManageDomainePluginLuteces.jsp?plugin_name=dockerlutece" id="a1">DomainePluginLutece</a><li>
+	<li class="active"><@tabs tab="pluginlutece" /></li>
+    </ul>	
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#a1').click(function() {
+                $('.wrapper').load('jsp/admin/plugins/dockerlutece/ManageDomainePluginLuteces.jsp?plugin_name=dockerlutece');
+                return false;
+            });
+        });
+    </script>
+
+<@rowBoxHeader i18nTitleKey="dockerlutece.modify_pluginlutece.pageTitle">
+    <form class="form-horizontal" method="post" name="modify_pluginlutece" action="jsp/admin/plugins/dockerlutece/ManagePluginLuteces.jsp">
+        <@messages errors=errors />
+        <input type="hidden" id="id" name="id" value="${pluginlutece.id}"/>
+        
+        <@fieldInputText i18nLabelKey="dockerlutece.modify_pluginlutece.labelGroupId" inputName="group_id" mandatory=true value="${pluginlutece.groupId}" i18nHelpBlockKey="dockerlutece.modify_pluginlutece.labelGroupId.help" />
+        <@fieldInputText i18nLabelKey="dockerlutece.modify_pluginlutece.labelArtifactId" inputName="artifact_id" mandatory=true value="${pluginlutece.artifactId}" i18nHelpBlockKey="dockerlutece.modify_pluginlutece.labelArtifactId.help" />
+        <@fieldInputText i18nLabelKey="dockerlutece.modify_pluginlutece.labelVersion" inputName="version" mandatory=true value="${pluginlutece.version}" i18nHelpBlockKey="dockerlutece.modify_pluginlutece.labelVersion.help" />
+        <@fieldInputText i18nLabelKey="dockerlutece.modify_pluginlutece.labelType" inputName="type" mandatory=true value="${pluginlutece.type}" i18nHelpBlockKey="dockerlutece.modify_pluginlutece.labelType.help" />
+        <div class="col-lg-offset-2">
+		<label for="domaine" >#i18n{dockerlutece.create_pluginlutece.labelDomaine} * :</label>
+		<select name="domaine" class="col-md-offset-1">
+			<#list domainepluginlutece_list as domainepluginlutece>
+				<option value="${domainepluginlutece.domaine}"<#if (domainepluginlutece.domaine == pluginlutece.domaine)>selected
+				</#if>>${domainepluginlutece.domaine}</option>
+			</#list>
+		</select>
+		</div>
+        <@actionButtons button1Name="action_modifyPluginLutece" button2Name="view_managePluginLuteces"/>
+    </form>
+</@rowBoxHeader>
+

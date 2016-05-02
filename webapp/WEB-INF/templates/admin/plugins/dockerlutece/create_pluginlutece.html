@@ -1,0 +1,38 @@
+<#include "manageplugindockerlutece_tabs.html" />
+    <ul class="nav nav-tabs">
+	<li><a href="jsp/admin/plugins/dockerlutece/ManageDomainePluginLuteces.jsp?plugin_name=dockerlutece" id="a1">DomainePluginLutece</a><li>
+	<li class="active"><@tabs tab="pluginlutece" /></li>
+    </ul>	
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#a1').click(function() {
+            $('.wrapper').load('jsp/admin/plugins/dockerlutece/ManageDomainePluginLuteces.jsp?plugin_name=dockerlutece');
+            return false;
+        });
+    });
+    </script>
+<@rowBoxHeader i18nTitleKey="dockerlutece.create_pluginlutece.pageTitle">
+    <form class="form-horizontal" method="post" name="create_pluginlutece" action="jsp/admin/plugins/dockerlutece/ManagePluginLuteces.jsp">
+        <@messages errors=errors />
+        <input type="hidden" id="id" name="id"/>
+        
+        <@fieldInputText i18nLabelKey="dockerlutece.create_pluginlutece.labelGroupId" inputName="group_id" mandatory=true value="${pluginlutece.groupId!'fr.paris.lutece.plugins'}" i18nHelpBlockKey="dockerlutece.create_pluginlutece.labelGroupId.help" />
+        <@fieldInputText i18nLabelKey="dockerlutece.create_pluginlutece.labelArtifactId" inputName="artifact_id" mandatory=true value="${pluginlutece.artifactId!''}" i18nHelpBlockKey="dockerlutece.create_pluginlutece.labelArtifactId.help" />
+        <@fieldInputText i18nLabelKey="dockerlutece.create_pluginlutece.labelVersion" inputName="version" mandatory=true value="${pluginlutece.version!'-SNAPSHOT'}" i18nHelpBlockKey="dockerlutece.create_pluginlutece.labelVersion.help" />
+	<@fieldInputText i18nLabelKey="dockerlutece.create_pluginlutece.labelType" inputName="type" mandatory=true value="${pluginlutece.type!'lutece-plugin'}" i18nHelpBlockKey="dockerlutece.create_pluginlutece.labelType.help" />
+		<div class="col-lg-offset-2">
+		<label for="domaine" >#i18n{dockerlutece.create_pluginlutece.labelDomaine} * :</label>
+		<select name="domaine" class="col-md-offset-1">
+			<#list domainepluginlutece_list as domainepluginlutece>
+				<option value="${domainepluginlutece.domaine}">${domainepluginlutece.domaine}</option>
+			</#list>
+		</select>
+		<span class="help-block">#i18n{dockerlutece.create_pluginlutece.labelDomaine.help}</span>
+		</div>
+	   <@actionButtons button1Name="action_createPluginLutece" button2Name="view_managePluginLuteces"/>
+    </form>
+	<div style="color:#FF0000">
+		${info_domaine}
+	</div>
+</@rowBoxHeader>
+

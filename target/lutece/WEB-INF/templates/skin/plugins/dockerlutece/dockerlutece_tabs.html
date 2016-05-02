@@ -1,0 +1,16 @@
+<#macro tabs tab >
+<div>
+    <ul class="nav nav-tabs">
+        <li <#if tab="domainepluginlutece">class="active"</#if>>
+            <a href="jsp/site/Portal.jsp?page=domainepluginlutece">
+                #i18n{dockerlutece.manage_domainepluginluteces.pageTitle}
+            </a>
+        </li>
+        <li <#if tab="pluginlutece">class="active"</#if>>
+            <a href="jsp/site/Portal.jsp?page=pluginlutece">
+                #i18n{dockerlutece.manage_pluginluteces.pageTitle}
+            </a>
+        </li>
+    </ul>
+</div>
+</#macro>
